@@ -1,6 +1,3 @@
-
-if (location.hostname === 'localhost') document.querySelector('base').href = '/'
-
 const scrollConfig = {
   cleanup: true,
   distance: '20%',
@@ -12,3 +9,46 @@ ScrollReveal().reveal('h1, h2, p, section', {
   ...scrollConfig,
   viewOffset: { top: -500 },
 })
+
+/* Rainbow */
+let rainbowActive = 0
+let rainbowInterval
+let rainbowDisabled = false
+
+const rainbowItems = document.querySelectorAll('.rainbow-item')
+const rainbowViews = document.querySelectorAll('.rainbow-view')
+
+function setRainbowActive(index) {
+  rainbowItems.forEach((item, i) => {
+    item.classList.toggle('active', i === index)
+  })
+  rainbowViews.forEach((view, i) => {
+    view.classList.toggle('active', i === index)
+  })
+}
+
+function startRainbowCycle() {
+  if (rainbowDisabled) return
+  rainbowInterval = setInterval(() => {
+    rainbowActive = (rainbowActive + 1) % rainbowItems.length
+    setRainbowActive(rainbowActive)
+  }, 1500)
+}
+
+if (rainbowItems.length) {
+  setRainbowActive(0)
+  startRainbowCycle()
+
+  rainbowItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      clearInterval(rainbowInterval)
+      rainbowActive = index
+      setRainbowActive(rainbowActive)
+      rainbowDisabled = true
+      setTimeout(() => {
+        rainbowDisabled = false
+        startRainbowCycle()
+      }, 60000)
+    })
+  })
+}

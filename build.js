@@ -11,7 +11,12 @@ fs.rmSync(buildDir, { recursive: true, force: true })
 fs.mkdirSync(buildDir, { recursive: true })
 
 // Read layout template
-const layout = fs.readFileSync(path.join(srcDir, 'layout.html'), 'utf8')
+const layoutTemplate = fs.readFileSync(path.join(srcDir, 'layout.html'), 'utf8')
+
+// Determine base href based on environment
+const isDevelopment = process.argv.includes('--dev')
+const baseHref = isDevelopment ? '<base href="/" />' : '<base href="/mask/" />'
+const layout = layoutTemplate.replace('{base}', baseHref)
 
 // Process all files
 fs.readdirSync(srcDir).forEach(file => {
