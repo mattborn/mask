@@ -37,6 +37,7 @@ body {
 
 h1,
 h2,
+h3,
 p {
   margin: 0;
   text-wrap: balance;
@@ -64,12 +65,26 @@ a {
   white-space: nowrap;
 }
 
+abbr {
+  border-bottom: 1px dotted var(--color-half);
+  cursor: help;
+  text-decoration: none;
+  /* text-decoration-color: var(--color-half); */
+}
+
 button {
   appearance: none;
   background: none;
   border: 0;
   color: inherit;
   cursor: pointer;
+}
+
+.smallcaps {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* Layout */
@@ -88,27 +103,19 @@ footer {
   padding: clamp(1rem, 3vw, 2rem);
 }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-nav a {
-  color: var(--color-half);
-  text-decoration: none;
-}
-nav a:hover {
-  color: var(--color-darkest);
-}
-
 section {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   min-height: 80vh;
   padding: var(--space-clamp);
 }
 
 .inset {
   display: flex;
+  flex: 1;
   gap: var(--space-gap);
+  max-width: 75rem;
 }
 
 .column {
@@ -120,23 +127,67 @@ section {
 }
 
 /* Header */
-header nav:last-child {
-  justify-content: flex-end;
-  flex-direction: column-reverse;
-  flex: 1;
+nav,
+.nav-group {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#menu-bars {
+  align-items: center;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  font-size: 1.25rem;
+  height: 2.5rem;
+  justify-content: center;
+  width: 2.5rem;
+}
+#menu-bars:hover,
+.open #menu-bars {
+  background: var(--color-light);
+}
+.open #menu-bars i::before {
+  content: '\f00d';
+}
+.nav-group {
+  display: none;
+}
+.open .nav-group {
+  display: flex;
+}
+nav a {
+  color: var(--color-half);
+  text-decoration: none;
+}
+nav a:hover,
+nav a.active {
+  color: var(--color-darkest);
+}
+nav .button {
+  margin: 0.5rem 0 0;
 }
 
 @media (min-width: 40rem) {
   header {
     align-items: center;
   }
-  nav {
+  nav,
+  .nav-group {
     align-items: center;
     flex-direction: unset;
     gap: 1.5rem;
   }
-  header nav:last-child {
-    flex-direction: unset;
+  nav,
+  .nav-group:not(:last-child) {
+    flex: 1;
+  }
+  #menu-bars {
+    display: none;
+  }
+  .nav-group {
+    display: flex;
   }
 }
 
@@ -223,12 +274,11 @@ footer {
   background-position: center;
   background-size: cover;
   border-radius: 2rem;
-  display: flex;
   flex-direction: column;
-  flex: 1;
   gap: 1.5rem;
   justify-content: center;
   margin: 0 auto;
+  max-width: unset;
   overflow: hidden;
   padding: var(--space-clamp);
   position: relative;
@@ -290,6 +340,65 @@ footer {
 
 /* == Way == */
 
+/* Architecture */
+
+#arch .inset {
+  flex-direction: column;
+  gap: 1.5rem;
+}
+#arch h3 {
+  margin: 0 0 0.5rem;
+}
+#arch .smallcaps,
+#arch p {
+  color: var(--color-half);
+}
+#arch-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 0;
+}
+.arch-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#arch-stages > div {
+  background: var(--color-light);
+  /* prettier-ignore */
+  clip-path: polygon(0 0, calc(100% - 1rem) 0, 100% 50%, calc(100% - 1rem) 100%, 0 100%, 1rem 50%);
+  flex: 1;
+  padding: 1rem 2rem;
+}
+#arch-stages > div:first-child {
+  border-radius: var(--radius);
+  /* prettier-ignore */
+  clip-path: polygon(0 0, calc(100% - 1rem) 0, 100% 50%, calc(100% - 1rem) 100%, 0 100%);
+}
+#arch-exec,
+#arch-grid > div {
+  background: var(--color-light);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+#arch-exec,
+#arch-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+#arch-exec > div,
+#arch-grid > div {
+  flex: 1 0 10rem;
+  text-wrap: balance;
+}
+
+@media (min-width: 40rem) {
+  #arch-grid > div {
+    flex: 1 0 20rem;
+  }
+}
+
 /* Rainbow */
 #rainbow-list {
   display: flex;
@@ -342,3 +451,10 @@ footer {
 }
 
 /* == Investors == */
+
+/* == Privacy & Terms == */
+
+#privacy .inset,
+#terms .inset {
+  flex-direction: column;
+}

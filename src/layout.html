@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {base}
+    <base href="{base}" />
     <title>Mask</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,7 +23,7 @@
   <body>
     <!-- Header -->
     <header>
-      <a href="/mask" class="mask-brand">
+      <a href="{base}" class="mask-brand">
         <span class="mask-logo">
           <span class="mask-diamond">⬥</span>
           <span class="mask-diamond">⬥</span>
@@ -31,18 +31,21 @@
         <span class="mask-word">Mask</span>
       </a>
       <nav>
-        <a href="way">The Mask Way</a>
-        <a href="investors">Investors</a>
-      </nav>
-      <nav>
-        <a href="#">Log in</a>
-        <a
-          class="button"
-          href="https://outlook.office.com/book/investorinterestcall@llmmask.com"
-          target="_blank"
-        >
-          Book a demo
-        </a>
+        <div id="menu-bars"><i class="fa-light fa-bars"></i></div>
+        <div class="nav-group">
+          <a href="way">The Mask Way</a>
+          <a href="investors">Investors</a>
+        </div>
+        <div class="nav-group">
+          <a href="#">Log in</a>
+          <a
+            class="button"
+            href="https://outlook.office.com/book/investorinterestcall@llmmask.com"
+            target="_blank"
+          >
+            Book a demo
+          </a>
+        </div>
       </nav>
     </header>
     {content}

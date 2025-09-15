@@ -6,28 +6,38 @@ const path = require('path')
 const srcDir = 'src'
 const buildDir = 'build'
 
-// Create build directory
 fs.rmSync(buildDir, { recursive: true, force: true })
 fs.mkdirSync(buildDir, { recursive: true })
 
-// Read layout template
 const layoutTemplate = fs.readFileSync(path.join(srcDir, 'layout.html'), 'utf8')
 
-// Determine base href based on environment
 const isDevelopment = process.argv.includes('--dev')
-const baseHref = isDevelopment ? '<base href="/" />' : '<base href="/mask/" />'
-const layout = layoutTemplate.replace('{base}', baseHref)
+const basePath = isDevelopment ? '/' : '/mask/'
 
-// Process all files
+let layout = layoutTemplate.replace(/{base}/g, basePath)
+
 fs.readdirSync(srcDir).forEach(file => {
   const srcPath = path.join(srcDir, file)
   const destPath = path.join(buildDir, file)
-  
+
   if (file === 'layout.html') return
-  
+
   if (file.endsWith('.html')) {
     const content = fs.readFileSync(srcPath, 'utf8')
-    const html = layout.replace('{content}', content)
+    let html = layout.replace('{content}', content)
+
+    // Add active class to current page nav link
+    const pageName = file.replace('.html', '')
+    const navPages = ['way', 'investors']
+
+    navPages.forEach(page => {
+      const isActive = page === pageName
+      html = html.replace(
+        `href="${page}"`,
+        `href="${page}"${isActive ? ' class="active"' : ''}`,
+      )
+    })
+
     fs.writeFileSync(destPath, html)
     console.log(`Built ${file}`)
   } else {

@@ -1,3 +1,68 @@
+<!-- Architecture -->
+<section id="arch">
+  <div class="inset">
+    <div class="arch-group">
+      <h2>Three-Plane Architecture</h2>
+      <p>
+        Rules decide, models write. Plans, policies, and tests are portable
+        across models.
+      </p>
+    </div>
+    <div class="arch-group">
+      <div class="smallcaps">Deterministic</div>
+      <h3>Control Plane</h3>
+      <div id="arch-stages">
+        <div>Intent clarification</div>
+        <div>Task planning</div>
+        <div>Policy application</div>
+        <div>Quality assurance gates</div>
+        <div>Audit &amp; learning</div>
+      </div>
+    </div>
+    <div class="arch-group">
+      <div class="smallcaps">Hybrid</div>
+      <h3>Execution Plane</h3>
+      <div id="arch-exec">
+        <div>
+          Tool &amp;
+          <abbr title="Retrieval-Augmented Generation">RAG</abbr> calls
+        </div>
+        <div>
+          <abbr title="Large Language Model">LLM</abbr>/
+          <abbr title="Vision Language Model">VLM</abbr> inference under
+          contracts
+        </div>
+        <div>Multi-agent coordination</div>
+        <div>Rollback &amp; escalation</div>
+      </div>
+    </div>
+    <div class="arch-group">
+      <div class="smallcaps">Ecosystem</div>
+      <h3>Integration Plane</h3>
+      <div id="arch-grid">
+        <div>
+          <abbr title="Agent-to-Agent (Protocol)">A2A</abbr> /
+          <abbr title="Agent Communication Protocol">ACP</abbr> adapters
+        </div>
+        <div>REST &amp; streaming APIs</div>
+        <div>
+          <abbr title="Model Context Protocol">MCP</abbr> / tool adapters (data,
+          search, actuation)
+        </div>
+        <div>Plug-ins to the company’s safety &amp; risk tools</div>
+        <div>Event bus &amp; webhooks</div>
+        <div>
+          Identity &amp; secrets (<abbr title="Role-Based Access Control">
+            RBAC
+          </abbr>
+          /<abbr title="Attribute-Based Access Control">ABAC</abbr>,
+          <abbr title="Key Management Service">KMS</abbr>, Vault)
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Rainbow -->
 <section id="rainbow">
   <div class="inset">

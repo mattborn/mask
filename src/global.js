@@ -1,3 +1,5 @@
+const qs = document.querySelector.bind(document)
+
 const scrollConfig = {
   cleanup: true,
   distance: '20%',
@@ -52,3 +54,6 @@ if (rainbowItems.length) {
     })
   })
 }
+
+/* Menu toggle */
+qs('#menu-bars')?.addEventListener('click', () => qs('header nav')?.classList.toggle('open'))
