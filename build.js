@@ -9,12 +9,7 @@ const buildDir = 'build'
 fs.rmSync(buildDir, { recursive: true, force: true })
 fs.mkdirSync(buildDir, { recursive: true })
 
-const layoutTemplate = fs.readFileSync(path.join(srcDir, 'layout.html'), 'utf8')
-
-const isDevelopment = process.argv.includes('--dev')
-const basePath = isDevelopment ? '/' : '/mask/'
-
-let layout = layoutTemplate.replace(/{base}/g, basePath)
+const layout = fs.readFileSync(path.join(srcDir, 'layout.html'), 'utf8')
 
 fs.readdirSync(srcDir).forEach(file => {
   const srcPath = path.join(srcDir, file)
